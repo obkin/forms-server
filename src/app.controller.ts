@@ -1,17 +1,15 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Post } from '@nestjs/common';
 import { AppService } from './app.service';
 
-@Controller('user')
+@Controller()
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
-  @Get('get')
-  getHello(): string {
-    return this.appService.getHello();
-  }
-
-  @Post('postdata')
+  @Post()
   create(@Body() userData: { name: string; tel: string }) {
-    console.log(`name: ${userData.name}, phone: ${userData.tel}`);
+    console.log(
+      `name: ${userData.name}, phone: ${userData.tel},`,
+      `time: ${new Date().toLocaleString()}`,
+    );
   }
 }
