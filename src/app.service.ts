@@ -9,10 +9,10 @@ export class AppService {
 		this.bot_token = '6025950417:AAGykNAOx0yAEnH-eRD5KTHWASpijZzuCoo'; // need configService !!!
 		this.chat_id = '-934566585'; // need configService !!!
 	}
-	async sendDataToBot(): Promise<void> {
+	async sendDataToBot(data: string): Promise<void> {
 		try {
 			await axios.post(
-				`https://api.telegram.org/bot${this.bot_token}/sendMessage?chat_id=${this.chat_id}&text=Hello%20World`,
+				`https://api.telegram.org/bot${this.bot_token}/sendMessage?chat_id=${this.chat_id}&text=${data}`,
 			);
 			console.log('[AppService] - success');
 		} catch (e) {

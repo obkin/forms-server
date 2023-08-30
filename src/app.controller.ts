@@ -7,7 +7,13 @@ export class AppController {
 
 	@Post()
 	create(@Body() userData: { name: string; tel: string }): void {
-		this.appService.sendDataToBot();
+		const data = `
+			name: ${userData.name}, 
+			phone: ${userData.tel}, 
+			date: ${new Date().toLocaleString()}
+		`;
+		this.appService.sendDataToBot(data);
+
 		console.log(
 			`name: ${userData.name}, phone: ${userData.tel},`,
 			`time: ${new Date().toLocaleString()}`,
