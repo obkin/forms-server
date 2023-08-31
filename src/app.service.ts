@@ -1,22 +1,23 @@
 import { Injectable } from '@nestjs/common';
 import axios from 'axios';
+import { ConfigService } from './config/config.service';
 
 @Injectable()
 export class AppService {
 	bot_token: string;
 	chat_id: string;
-	constructor() {
-		this.bot_token = '6025950417:AAGykNAOx0yAEnH-eRD5KTHWASpijZzuCoo'; // need configService !!!
-		this.chat_id = '-934566585'; // need configService !!!
+	constructor(private readonly configService: ConfigService) {
+		this.bot_token = configService.get('BOT_TOKEN');
+		this.chat_id = configService.get('CHAT_ID');
 	}
 	async sendDataToBot(data: string): Promise<void> {
 		try {
 			await axios.post(
 				`https://api.telegram.org/bot${this.bot_token}/sendMessage?chat_id=${this.chat_id}&text=${data}`,
 			);
-			console.log('[AppService] - success');
+			console.log('[AppService] success: user data sent to telegram');
 		} catch (e) {
-			console.log('[AppService] - fail');
+			console.log('[AppService] fail: user data was not send to telegram');
 		}
 	}
 }
