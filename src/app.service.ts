@@ -17,7 +17,7 @@ export class AppService {
 			);
 			console.log('[AppService] success: user data sent to telegram');
 		} catch (e) {
-			console.log('[AppService] fail: user data was not send to telegram');
+			console.log('[AppService] fail: user data was not send to telegram: ', e);
 		}
 	}
 }

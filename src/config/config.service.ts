@@ -8,9 +8,11 @@ export class ConfigService implements IConfigService {
 	constructor() {
 		const result: DotenvConfigOutput = config();
 		if (result.error) {
-			console.log('[ConfigService] success: configuration file (.env) not loaded or not found');
+			console.log('[ConfigService] fail: configuration file (.env) not loaded or not found');
 		} else {
-			console.log('[ConfigService] fail: configuration file (.env) loaded');
+			setTimeout(() => {
+				console.log('[ConfigService] success: configuration file (.env) loaded');
+			}, 5000);
 			this.envConfig = result.parsed as DotenvParseOutput;
 		}
 	}

@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "types": [],
+    "types": [], // [GIT] added: ConfigService
     "module": "commonjs",
     "declaration": true,
     "removeComments": true,
