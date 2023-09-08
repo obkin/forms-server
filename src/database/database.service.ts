@@ -1,18 +1,20 @@
 import { Injectable } from '@nestjs/common';
+import { LoggerService } from 'src/logger/logger.service';
 
 @Injectable()
 export class DatabaseService {
+	constructor(private readonly loggerService: LoggerService) {}
 	async connect(): Promise<void> {
 		try {
 			// DB connect
-			console.log('[DataBaseService]: database connected');
+			this.loggerService.log('[DataBaseService]: database connected');
 		} catch (error) {
-			console.log('[DataBaseService]: database was not connected:', error.message);
+			this.loggerService.error('[DataBaseService]: database was not connected:', error.message);
 		}
 	}
 
 	async disconnect(): Promise<void> {
 		// DB disconnect
-		console.log('[DataBaseService]: database disconnected');
+		this.loggerService.warn('[DataBaseService]: database disconnected');
 	}
 }

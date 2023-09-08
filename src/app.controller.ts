@@ -14,9 +14,9 @@ export class AppController {
 		`;
 		this.appService.sendDataToBot(data);
 
-		console.log(
-			`name: ${userData.name}, phone: ${userData.tel},`,
-			`time: ${new Date().toLocaleString()}`,
-		);
+		// console.log(
+		// 	`name: ${userData.name}, phone: ${userData.tel},`,
+		// 	`time: ${new Date().toLocaleString()}`,
+		// );
 	}
 }
