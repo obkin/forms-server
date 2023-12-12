@@ -1,15 +1,14 @@
 import { Body, Controller, Post } from '@nestjs/common';
-import { AppService } from './app.service';
 import { BuyerOrderDto } from './buyer/dto/buyer-order.dto';
+import { BuyerService } from './buyer/buyer.service';
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(private readonly buyerService: BuyerService) {}
 
   @Post()
   create(@Body() clientData: BuyerOrderDto): void {
-    this.appService.sendDataToBot(clientData);
-    this.appService.createBuyer(clientData);
+    this.buyerService.sendDataToBot(clientData);
 
     // console.log(
     // 	`name: ${userData.name}, phone: ${userData.tel},`,
