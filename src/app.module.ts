@@ -5,9 +5,10 @@ import { LoggerService } from './logger/logger.service';
 import { ConfigModule } from '@nestjs/config';
 import { DatabaseModule } from './database/database.module';
 import { BuyerService } from './buyer/buyer.service';
+import { BuyerModule } from './buyer/buyer.module';
 
 @Module({
-  imports: [ConfigModule.forRoot({ isGlobal: true }), DatabaseModule],
+  imports: [ConfigModule.forRoot({ isGlobal: true }), DatabaseModule, BuyerModule],
   controllers: [AppController],
   providers: [AppService, LoggerService, BuyerService],
 })
