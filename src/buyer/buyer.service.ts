@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { LoggerService } from 'src/logger/logger.service';
 import { BuyerOrderDto } from './dto/buyer-order.dto';
+import { BuyerRepository } from './buyer.repository';
 import axios from 'axios';
 @Injectable()
 export class BuyerService {
@@ -9,10 +10,22 @@ export class BuyerService {
   chat_id: string;
   constructor(
     private readonly configService: ConfigService,
+    private readonly buyerRepository: BuyerRepository,
     private readonly loggerService: LoggerService,
   ) {
     this.bot_token = configService.get('BOT_TOKEN');
     this.chat_id = configService.get('CHAT_ID');
+  }
+
+  async createNewOrder(clientData): Promise<void> {
+    try {
+      const res = await this.buyerRepository.create(clientData);
+      if (res) {
+        this.loggerService.log(`[BuyerService]: you have new order`);
+      }
+    } catch (e) {
+      this.loggerService.error(`[BuyerService]: ${e.message}`);
+    }
   }
 
   async sendDataToBot(clientData: BuyerOrderDto): Promise<void> {
